@@ -1,22 +1,63 @@
-import React from "react";
-import { StyleSheet, View, Text } from "react-native";
-import Payment from "../Payment/Payment";
-const Donation = props => {
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  FlatList,
+  Image
+} from "react-native";
+import sadaqa from "../../assets/sadaqa.png";
+import zakat from "../../assets/zakat.png";
+const Donation = ({ navigation }) => {
+  const [donations, setDonations] = useState([
+    { id: 1, name: "Sadaka", icon: sadaqa },
+    { id: 2, name: "Zakat", icon: zakat }
+  ]);
   return (
-    <View style={styles.donationContainer}>
-      <Text style={styles.formTitle}>Make donations</Text>
-      <Payment />
+    <View>
+      <Text style={styles.title}>Select type of donation</Text>
+      <FlatList
+        keyExtractor={item => item.id.toString()}
+        data={donations}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("amount", { description: item.name })
+            }
+          >
+            <View style={styles.itemContainer}>
+              <Image source={item.icon} style={styles.icon} />
+              <Text style={styles.donationItemText}>{item.name}</Text>
+            </View>
+          </TouchableOpacity>
+        )}
+      />
     </View>
   );
 };
 const styles = StyleSheet.create({
-  donationContainer: {
-    padding: 10
-  },
-  formTitle: {
+  title: {
+    paddingVertical: 20,
+    fontSize: 18,
     fontWeight: "bold",
-    fontSize: 20,
-    marginVertical: 10
+    textAlign: "center"
+  },
+  itemContainer: {
+    elevation: 3,
+    padding: 20,
+    flexDirection: "row",
+    marginVertical: 2,
+    backgroundColor: "#fefefe",
+    shadowColor: "#aaa",
+    shadowOffset: { height: 1, width: 1 },
+    shadowOpacity: 0.4,
+    shadowRadius: 1
+  },
+  icon: {
+    width: 30,
+    height: 30,
+    marginHorizontal: 20
   }
 });
 export default Donation;

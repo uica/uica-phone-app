@@ -9,7 +9,7 @@ import {
 import Prayer from "../Prayer/Prayer";
 import masjibBG from "../../assets/prayersBG.jpg";
 import axios from "axios";
-
+import env from "../../env";
 const Prayers = () => {
   const [prayers, setPrayers] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
@@ -19,8 +19,9 @@ const Prayers = () => {
   }, []);
 
   const fetchPrayers = () => {
+    const { apiUrl } = env();
     axios
-      .get("http://192.168.0.31:5000/api/prayers")
+      .get(`${apiUrl}/prayers`)
       .then(({ data }) => {
         setPrayers(data);
         setRefreshing(false);

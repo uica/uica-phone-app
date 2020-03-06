@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import {} from "@expo/vector-icons";
+import twelve from "twentyfour-to-twelve";
 const Prayer = ({ prayer }) => {
   return (
     <View style={styles.prayerContainer}>
@@ -8,7 +8,7 @@ const Prayer = ({ prayer }) => {
         <Text style={styles.prayerName}>{prayer.prayerName}</Text>
       </View>
       <View style={styles.prayerItem}>
-        <Text style={styles.prayerTime}>{prayer.time}</Text>
+        <Text style={styles.prayerTime}>{twelve(prayer.time)}</Text>
       </View>
     </View>
   );
