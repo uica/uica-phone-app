@@ -4899,6 +4899,11 @@ simple-swizzle@^0.2.2:
   dependencies:
     is-arrayish "^0.3.1"
 
+simple-zeropad@^1.0.3:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/simple-zeropad/-/simple-zeropad-1.0.5.tgz#5aa2fe5d1904c851ee64a9969e76dde1cf8a3e5d"
+  integrity sha1-WqL+XRkEyFHuZKmWnnbd4c+KPl0=
+
 slash@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-2.0.0.tgz#de552851a1759df3a8f206535442f5ec4ddeab44"
@@ -5249,10 +5254,23 @@ toposort@^2.0.2:
   resolved "https://registry.yarnpkg.com/toposort/-/toposort-2.0.2.tgz#ae21768175d1559d48bef35420b2f4962f09c330"
   integrity sha1-riF2gXXRVZ1IvvNUILL0li8JwzA=
 
+trim@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/trim/-/trim-0.0.1.tgz#5858547f6b290757ee95cccc666fb50084c460dd"
+  integrity sha1-WFhUf2spB1fulczMZm+1AITEYN0=
+
 tslib@^1.10.0:
   version "1.11.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.11.0.tgz#f1f3528301621a53220d58373ae510ff747a66bc"
   integrity sha512-BmndXUtiTn/VDDrJzQE7Mm22Ix3PxgLltW9bSNLoeCY31gnG2OPx0QqJnuc9oMIKioYrz487i6K9o4Pdn0j+Kg==
+
+twentyfour-to-twelve@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/twentyfour-to-twelve/-/twentyfour-to-twelve-1.0.1.tgz#89857be5ae2abe83e7a0a2d0b41c218ee2c2dbfc"
+  integrity sha1-iYV75a4qvoPnoKLQtBwhjuLC2/w=
+  dependencies:
+    simple-zeropad "^1.0.3"
+    trim "0.0.1"
 
 type-fest@^0.7.1:
   version "0.7.1"

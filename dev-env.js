@@ -11,13 +11,16 @@ const localhost = Platform.OS === "ios" ? "localhost:8080" : "10.0.2.2:8080";
 
 const ENV = {
   dev: {
-    apiUrl: localhost
+    apiUrl: localhost,
+    FB_ID: "Facebook App ID"
   },
   staging: {
-    apiUrl: "[your.staging.api.here]"
+    apiUrl: "",
+    FB_ID: null
   },
   prod: {
-    apiUrl: "[your.production.api.here]"
+    apiUrl: "",
+    FB_ID: null
   }
 };
 
