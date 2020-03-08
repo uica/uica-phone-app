@@ -6,6 +6,7 @@ import {
 } from "@react-navigation/drawer";
 import { Image, StyleSheet, View, Text, Alert } from "react-native";
 import Animated from "react-native-reanimated";
+import defaultUserImage from "../../assets/defaultUser.png";
 export default CustomDrawerContent = ({ progress, ...rest }) => {
   const translateX = Animated.interpolate(progress, {
     inputRange: [0, 1],
@@ -22,7 +23,11 @@ export default CustomDrawerContent = ({ progress, ...rest }) => {
           onPress: () => console.log("Canceled"),
           style: "cancel"
         },
-        { text: "Logout", onPress: () => rest.setLoggedIn(false) }
+        {
+          text: "Logout",
+          onPress: () =>
+            rest.setLoggedIn(false) || console.log("error logging out")
+        }
       ],
       { cancelable: false }
     );
@@ -33,12 +38,16 @@ export default CustomDrawerContent = ({ progress, ...rest }) => {
       <Animated.View style={{ transform: [{ translateX }] }}>
         <View style={styles.profilePicContainer}>
           <Image
-            source={{ uri: rest.user.userPicture }}
+            source={
+              rest.user ? { uri: rest.user.userPicture } : defaultUserImage
+            }
             style={styles.profilePic}
           />
         </View>
         <View style={styles.nameContainer}>
-          <Text style={styles.name}>{rest.user.name}</Text>
+          <Text style={styles.name}>
+            {(rest.user && rest.user.name) || "No Name"}
+          </Text>
         </View>
         <DrawerItemList state={styles.items} {...rest} />
         <DrawerItem
