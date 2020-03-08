@@ -6,7 +6,7 @@ import DonationStack from "../../routes/DonationStachNav";
 import { FontAwesome } from "@expo/vector-icons";
 const Tab = createMaterialBottomTabNavigator();
 
-function BottomNav() {
+function MyTabs(props) {
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -61,4 +61,4 @@ function BottomNav() {
   );
 }
 
-export default BottomNav;
+export default MyTabs;

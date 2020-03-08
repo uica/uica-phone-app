@@ -4,7 +4,7 @@ import Home from "../components/Screens/Home";
 import Header from "../components/Shared/Header";
 const Stack = createStackNavigator();
 
-function HomeStack() {
+function HomeStack(props) {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -19,7 +19,7 @@ function HomeStack() {
         name="Home"
         options={{
           title: "UICA",
-          headerTitle: () => <Header />,
+          headerTitle: () => <Header {...props} />,
           headerTitleAlign: "center",
           headerTitleStyle: { fontSize: 28 }
         }}

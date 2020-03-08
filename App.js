@@ -1,7 +1,7 @@
 import "react-native-gesture-handler";
 import React, { useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import BottomNav from "./components/BottomNav/BottomNav";
+import Drawer from "./components/Navigators/DrawerNavigator";
 import { Login } from "./components/Screens";
 import env from "./env";
 export default function App() {
@@ -12,7 +12,7 @@ export default function App() {
 
   return loggedIn ? (
     <NavigationContainer>
-      <BottomNav />
+      <Drawer user={user} setLoggedIn={setLoggedIn} />
     </NavigationContainer>
   ) : (
     <Login setLoggedIn={setLoggedIn} setToken={setToken} setUser={setUser} />

@@ -41,15 +41,15 @@ const Login = ({ setLoggedIn, setUser, setToken }) => {
       `https://graph.facebook.com/me?access_token=${access_token}`
     );
     const {
-      request: { responseURL }
+      request: { responseURL: userPicture }
     } = await axios.get(
-      `https://graph.facebook.com/me/picture?access_token=${access_token}`
+      `https://graph.facebook.com/me/picture?type=large&access_token=${access_token}`
     );
 
     setLoading(false);
-    setLoggedIn(true);
-    setUser({ ...user, responseURL });
+    setUser({ ...user, userPicture });
     setToken(access_token);
+    setLoggedIn(true);
   };
   const handleGoogle = () => {
     console.log("Google");

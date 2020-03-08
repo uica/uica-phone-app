@@ -7,9 +7,10 @@ import {
   Amount,
   PaymentComplete
 } from "../components/Screens";
+import Header from "../components/Shared/Header";
 const Stack = createStackNavigator();
 
-function DonationStack() {
+function DonationStack(props) {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -22,6 +23,7 @@ function DonationStack() {
         name="donation"
         options={{
           title: "Donation",
+          headerTitle: () => <Header {...props} />,
           headerTitleAlign: "center",
           headerTitleStyle: { fontSize: 20 }
         }}

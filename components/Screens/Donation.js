@@ -8,11 +8,11 @@ import {
   Image
 } from "react-native";
 import sadaqa from "../../assets/sadaqa.png";
-import zakat from "../../assets/zakat.png";
+import masjid from "../../assets/masjidIcon.png";
 const Donation = ({ navigation }) => {
   const [donations, setDonations] = useState([
-    { id: 1, name: "Sadaka", icon: sadaqa },
-    { id: 2, name: "Zakat", icon: zakat }
+    { id: 1, name: "General", icon: sadaqa },
+    { id: 2, name: "Masjid Expansion", icon: masjid }
   ]);
   return (
     <View>
@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
     elevation: 3,
     padding: 20,
     flexDirection: "row",
+    alignItems: "center",
     marginVertical: 2,
     backgroundColor: "#fefefe",
     shadowColor: "#aaa",
