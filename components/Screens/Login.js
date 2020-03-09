@@ -65,10 +65,10 @@ const Login = ({ setLoggedIn, setUser, setToken }) => {
           <FontAwesome name="facebook-square" style={styles.facebookIcon} />
           <Text style={styles.facebookText}>Sign in with Facebook</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.googleBtn} onPress={handleGoogle}>
+        {/* <TouchableOpacity style={styles.googleBtn} onPress={handleGoogle}>
           <FontAwesome name="google" style={styles.googleIcon} />
           <Text style={styles.googleText}>Sign in with Google</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </ImageBackground>
   );

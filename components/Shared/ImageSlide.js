@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   View,
   Text,
@@ -10,13 +10,42 @@ import {
 } from "react-native";
 
 const ImageSlide = ({ images, navigation }) => {
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const DEVICE_WIDTH = Dimensions.get("window").width;
+  const scrollRef = useRef();
+
+  useEffect(() => {
+    const thisInterval = setInterval(() => {
+      setSelectedIndex(
+        selectedIndex === images.length - 1 ? 0 : selectedIndex + 1
+      );
+    }, 5000);
+    scrollRef.current.scrollTo({
+      animated: true,
+      y: 0,
+      x: DEVICE_WIDTH * selectedIndex
+    });
+    return () => clearInterval(thisInterval);
+  }, [selectedIndex]);
+
   const handlePress = () => {
     navigation.navigate("Donation");
   };
+
+  const handleSelectIndex = event => {
+    const viewSize = event.nativeEvent.layoutMeasurement.width;
+    const offset = event.nativeEvent.contentOffset.x;
+
+    setSelectedIndex(Math.floor(offset / viewSize));
+  };
   return (
     <View style={{ height: "50%", width: "100%" }}>
-      <ScrollView horizontal pagingEnabled>
+      <ScrollView
+        horizontal
+        pagingEnabled
+        ref={scrollRef}
+        onMomentumScrollEnd={handleSelectIndex}
+      >
         {images.length > 0 &&
           images.map(img => (
             <ImageBackground
@@ -40,6 +69,23 @@ const ImageSlide = ({ images, navigation }) => {
             </ImageBackground>
           ))}
       </ScrollView>
+      <View style={styles.dotsContainer}>
+        {images.length > 0 &&
+          images.map((img, i) => (
+            <View
+              key={i}
+              style={[
+                styles.dots,
+                {
+                  opacity: i === selectedIndex ? 1 : 0.6,
+                  width: i === selectedIndex ? 8 : 6,
+                  height: i === selectedIndex ? 8 : 6,
+                  borderRadius: i === selectedIndex ? 4 : 3
+                }
+              ]}
+            ></View>
+          ))}
+      </View>
     </View>
   );
 };
@@ -75,6 +121,23 @@ const styles = StyleSheet.create({
     color: "#fff",
     textAlign: "center",
     fontWeight: "bold"
+  },
+  dotsContainer: {
+    position: "absolute",
+    bottom: 0,
+    height: 10,
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row"
+  },
+  dots: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    borderWidth: 1,
+    backgroundColor: "#fff",
+    margin: 5
   }
 });
 
