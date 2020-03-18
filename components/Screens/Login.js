@@ -13,18 +13,16 @@ import Loading from "./Loading";
 import { AuthSession } from "expo";
 import env from "../../env";
 import axios from "axios";
-
 const Login = ({ setLoggedIn, setUser, setToken }) => {
   const [loading, setLoading] = useState(false);
+
   const handleFacebook = async () => {
     setLoading(true);
     const { FB_ID } = env();
 
-    let redirectUrl = AuthSession.getRedirectUrl();
+    const redirectUrl = AuthSession.getRedirectUrl();
 
-    let {
-      params: { access_token }
-    } = await AuthSession.startAsync({
+    const { type, params } = await AuthSession.startAsync({
       authUrl:
         `https://www.facebook.com/v2.8/dialog/oauth?response_type=token` +
         `&client_id=${FB_ID}` +
@@ -37,23 +35,85 @@ const Login = ({ setLoggedIn, setUser, setToken }) => {
       setToken(null);
     });
 
-    const { data: user } = await axios.get(
-      `https://graph.facebook.com/me?access_token=${access_token}`
-    );
-    const {
-      request: { responseURL: userPicture }
-    } = await axios.get(
-      `https://graph.facebook.com/me/picture?type=large&access_token=${access_token}`
-    );
+    if (type === "success") {
+      const { access_token } = params;
+      const { data: user } = await axios.get(
+        `https://graph.facebook.com/me?access_token=${access_token}`
+      );
 
-    setLoading(false);
-    setUser({ ...user, userPicture });
-    setToken(access_token);
-    setLoggedIn(true);
+      const {
+        request: { responseURL: userPicture }
+      } = await axios.get(
+        `https://graph.facebook.com/me/picture?type=large&access_token=${access_token}`
+      );
+
+      setLoading(false);
+      setUser({ ...user, userPicture });
+      setToken(access_token);
+      setLoggedIn(true);
+    } else {
+      setLoading(false);
+      setLoggedIn(false);
+      setUser(null);
+      setToken(null);
+    }
   };
-  const handleGoogle = () => {
-    console.log("Google");
+
+  const handleGoogle = async () => {
+    const { GOOGLE_ID } = env();
+    setLoading(true);
+
+    const redirectUrl = await AuthSession.getRedirectUrl();
+    const { type, params } = await AuthSession.startAsync({
+      authUrl:
+        `https://accounts.google.com/o/oauth2/v2/auth/userinfo.email?` +
+        `client_id=${GOOGLE_ID}` +
+        `&redirect_uri=${encodeURIComponent(redirectUrl)}` +
+        `&response_type=code` +
+        `&access_type=offline` +
+        `&scope=profile`
+    }).catch(error => {
+      console.log(error);
+      setLoading(false);
+      setLoggedIn(false);
+      setUser(null);
+      setToken(null);
+    });
+    if (type === "success") {
+      const { code } = params;
+      const { data } = await axios
+        .post(
+          `https://accounts.google.com/o/oauth2/token?` +
+            `code=${code}` +
+            `&client_id=${GOOGLE_ID}` +
+            `&client_secret=y86V194kpCorAk3ikQfRX5q9&redirect_uri=${redirectUrl}` +
+            `&grant_type=authorization_code`
+        )
+        .then(({ data }) => {
+          setToken(data.access_token);
+          return axios.get(
+            `https://www.googleapis.com/oauth2/v1/userinfo?alt=json`,
+            {
+              headers: {
+                Authorization: "Bearer " + data.access_token
+              }
+            }
+          );
+        })
+        .catch(err => console.log(err));
+
+      const { name, picture } = data;
+      setLoading(false);
+      setUser({ name, userPicture: picture });
+      setLoggedIn(true);
+    } else {
+      setLoading(false);
+      setLoggedIn(false);
+      setUser(null);
+      setToken(null);
+    }
   };
+
   return loading ? (
     <Loading />
   ) : (
@@ -65,10 +125,10 @@ const Login = ({ setLoggedIn, setUser, setToken }) => {
           <FontAwesome name="facebook-square" style={styles.facebookIcon} />
           <Text style={styles.facebookText}>Sign in with Facebook</Text>
         </TouchableOpacity>
-        {/* <TouchableOpacity style={styles.googleBtn} onPress={handleGoogle}>
+        <TouchableOpacity style={styles.googleBtn} onPress={handleGoogle}>
           <FontAwesome name="google" style={styles.googleIcon} />
           <Text style={styles.googleText}>Sign in with Google</Text>
-        </TouchableOpacity> */}
+        </TouchableOpacity>
       </View>
     </ImageBackground>
   );

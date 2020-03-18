@@ -15,8 +15,9 @@ const Home = props => {
         setImages(data);
         setLoading(false);
       })
-      .catch(err => console.log(err));
-    setLoading(false);
+      .catch(error => {
+        console.log("Error", error);
+      });
   }, []);
 
   return loading ? (

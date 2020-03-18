@@ -1,10 +1,10 @@
 {
   "expo": {
-    "name": "UICA Phone App",
+    "name": "UICA",
     "slug": "UICA",
     "privacy": "public",
     "sdkVersion": "36.0.0",
-    "platforms": ["ios", "android"],
+    "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -17,8 +17,13 @@
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": ["**/*"],
+
     "ios": {
+      "bundleIdentifier": "com.uica.app",
       "supportsTablet": true
+    },
+    "android": {
+      "package": "com.uica.app"
     }
   }
 }
