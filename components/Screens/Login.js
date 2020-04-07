@@ -5,7 +5,7 @@ import {
   StatusBar,
   Text,
   ImageBackground,
-  TouchableOpacity
+  TouchableOpacity,
 } from "react-native";
 import bg from "../../assets/prayersBG.jpeg";
 import { FontAwesome } from "@expo/vector-icons";
@@ -26,8 +26,8 @@ const Login = ({ setLoggedIn, setUser, setToken }) => {
       authUrl:
         `https://www.facebook.com/v2.8/dialog/oauth?response_type=token` +
         `&client_id=${FB_ID}` +
-        `&redirect_uri=${encodeURIComponent(redirectUrl)}`
-    }).catch(error => {
+        `&redirect_uri=${encodeURIComponent(redirectUrl)}`,
+    }).catch((error) => {
       console.log(error);
       setLoading(false);
       setLoggedIn(false);
@@ -42,7 +42,7 @@ const Login = ({ setLoggedIn, setUser, setToken }) => {
       );
 
       const {
-        request: { responseURL: userPicture }
+        request: { responseURL: userPicture },
       } = await axios.get(
         `https://graph.facebook.com/me/picture?type=large&access_token=${access_token}`
       );
@@ -60,33 +60,34 @@ const Login = ({ setLoggedIn, setUser, setToken }) => {
   };
 
   const handleGoogle = async () => {
-    const { GOOGLE_ID } = env();
+    const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } = env();
     setLoading(true);
 
     const redirectUrl = await AuthSession.getRedirectUrl();
     const { type, params } = await AuthSession.startAsync({
       authUrl:
         `https://accounts.google.com/o/oauth2/v2/auth/userinfo.email?` +
-        `client_id=${GOOGLE_ID}` +
+        `client_id=${GOOGLE_CLIENT_ID}` +
         `&redirect_uri=${encodeURIComponent(redirectUrl)}` +
         `&response_type=code` +
         `&access_type=offline` +
-        `&scope=profile`
-    }).catch(error => {
+        `&scope=profile`,
+    }).catch((error) => {
       console.log(error);
       setLoading(false);
       setLoggedIn(false);
       setUser(null);
       setToken(null);
     });
+
     if (type === "success") {
       const { code } = params;
       const { data } = await axios
         .post(
           `https://accounts.google.com/o/oauth2/token?` +
             `code=${code}` +
-            `&client_id=${GOOGLE_ID}` +
-            `&client_secret=y86V194kpCorAk3ikQfRX5q9&redirect_uri=${redirectUrl}` +
+            `&client_id=${GOOGLE_CLIENT_ID}` +
+            `&client_secret=${GOOGLE_CLIENT_SECRET}&redirect_uri=${redirectUrl}` +
             `&grant_type=authorization_code`
         )
         .then(({ data }) => {
@@ -95,12 +96,16 @@ const Login = ({ setLoggedIn, setUser, setToken }) => {
             `https://www.googleapis.com/oauth2/v1/userinfo?alt=json`,
             {
               headers: {
-                Authorization: "Bearer " + data.access_token
-              }
+                Authorization: "Bearer " + data.access_token,
+              },
             }
           );
         })
-        .catch(err => console.log(err));
+        .catch((err) => {
+          console.log(err);
+          setLoading(false);
+          setLoggedIn(false);
+        });
 
       const { name, picture } = data;
       setLoading(false);
@@ -138,7 +143,7 @@ const styles = StyleSheet.create({
   bg: {
     width: "100%",
     height: "100%",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   loginContainer: {
     padding: 15,
@@ -146,12 +151,12 @@ const styles = StyleSheet.create({
     shadowColor: "#aaa",
     shadowOffset: { height: 1, width: 1 },
     shadowOpacity: 0.9,
-    shadowRadius: 1
+    shadowRadius: 1,
   },
   loginHeader: {
     textAlign: "center",
     fontSize: 30,
-    marginBottom: 20
+    marginBottom: 20,
   },
   facebookBtn: {
     backgroundColor: "#3b5998",
@@ -160,15 +165,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 5,
-    marginVertical: 5
+    marginVertical: 5,
   },
   facebookText: {
     color: "#fff",
-    marginHorizontal: 5
+    marginHorizontal: 5,
   },
   facebookIcon: {
     color: "#fff",
-    fontSize: 30
+    fontSize: 30,
   },
   googleBtn: {
     backgroundColor: "#db3236",
@@ -176,15 +181,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 5
+    borderRadius: 5,
   },
   googleText: {
     color: "#fff",
-    marginHorizontal: 5
+    marginHorizontal: 5,
   },
   googleIcon: {
     color: "#fff",
-    fontSize: 30
-  }
+    fontSize: 30,
+  },
 });
 export default Login;

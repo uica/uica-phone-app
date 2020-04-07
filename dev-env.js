@@ -11,17 +11,23 @@ const localhost = Platform.OS === "ios" ? "localhost:8080" : "10.0.2.2:8080";
 
 const ENV = {
   dev: {
-    apiUrl: localhost,
-    FB_ID: "Facebook App ID"
+    apiUrl: "",
+    FB_ID: "",
+    GOOGLE_CLIENT_ID: "",
+    GOOGLE_CLIENT_SECRET: "",
   },
   staging: {
     apiUrl: "",
-    FB_ID: null
+    FB_ID: "",
+    GOOGLE_CLIENT_ID: "",
+    GOOGLE_CLIENT_SECRET: "",
   },
   prod: {
     apiUrl: "",
-    FB_ID: null
-  }
+    FB_ID: "",
+    GOOGLE_CLIENT_ID: "",
+    GOOGLE_CLIENT_SECRET: "",
+  },
 };
 
 const getEnvVars = (env = Constants.manifest.releaseChannel) => {
