@@ -22,7 +22,7 @@ const ENV = {
     GOOGLE_CLIENT_ID: "",
     GOOGLE_CLIENT_SECRET: "",
   },
-  prod: {
+  production: {
     apiUrl: "",
     FB_ID: "",
     GOOGLE_CLIENT_ID: "",
@@ -38,8 +38,8 @@ const getEnvVars = (env = Constants.manifest.releaseChannel) => {
     return ENV.dev;
   } else if (env === "staging") {
     return ENV.staging;
-  } else if (env === "prod") {
-    return ENV.prod;
+  } else if (env === "production") {
+    return ENV.production;
   }
 };
 
