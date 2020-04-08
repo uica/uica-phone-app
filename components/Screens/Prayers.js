@@ -4,17 +4,20 @@ import {
   Text,
   View,
   FlatList,
-  ImageBackground
+  ImageBackground,
 } from "react-native";
 import Prayer from "../Prayer/Prayer";
 import masjibBG from "../../assets/prayersBG.jpg";
+import Loading from "./Loading";
 import axios from "axios";
 import env from "../../env";
 const Prayers = () => {
   const [prayers, setPrayers] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     fetchPrayers();
   }, []);
 
@@ -25,9 +28,11 @@ const Prayers = () => {
       .then(({ data }) => {
         setPrayers(data);
         setRefreshing(false);
+        setLoading(false);
       })
-      .catch(error => {
+      .catch((error) => {
         setRefreshing(false);
+        setLoading(false);
         console.log("error", error);
       });
   };
@@ -39,31 +44,35 @@ const Prayers = () => {
 
   return (
     <View style={styles.prayersContainer}>
-      <ImageBackground
-        source={masjibBG}
-        style={{ width: "100%", height: "100%" }}
-      >
-        <FlatList
-          data={prayers}
-          contentContainerStyle={styles.prayerItem}
-          renderItem={({ item }) => <Prayer prayer={item} />}
-          keyExtractor={item => item.id.toString()}
-          refreshing={refreshing}
-          onRefresh={handlePrayerRefresh}
-        />
-      </ImageBackground>
+      {loading ? (
+        <Loading />
+      ) : (
+        <ImageBackground
+          source={masjibBG}
+          style={{ width: "100%", height: "100%" }}
+        >
+          <FlatList
+            data={prayers}
+            contentContainerStyle={styles.prayerItem}
+            renderItem={({ item }) => <Prayer prayer={item} />}
+            keyExtractor={(item) => item.id.toString()}
+            refreshing={refreshing}
+            onRefresh={handlePrayerRefresh}
+          />
+        </ImageBackground>
+      )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   prayersContainer: {
-    flex: 1
+    flex: 1,
   },
   prayerItem: {
     flexGrow: 1,
-    justifyContent: "flex-end"
-  }
+    justifyContent: "flex-end",
+  },
 });
 
 export default Prayers;
