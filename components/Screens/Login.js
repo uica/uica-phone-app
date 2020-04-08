@@ -13,7 +13,7 @@ import Loading from "./Loading";
 import { AuthSession } from "expo";
 import env from "../../env";
 import axios from "axios";
-import * as AppleAuthentication from "expo-apple-authentication";
+// import * as AppleAuthentication from "expo-apple-authentication";
 
 const Login = ({ setLoggedIn, setUser, setToken }) => {
   const [loading, setLoading] = useState(false);
