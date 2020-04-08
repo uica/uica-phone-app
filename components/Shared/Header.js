@@ -2,10 +2,11 @@ import React from "react";
 import { StyleSheet, View, TouchableOpacity, Image } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import logo from "../../assets/uicaHeaderWhite.png";
-const Header = props => {
+const Header = (props) => {
   return (
     <View style={styles.header}>
-      <TouchableOpacity
+      {/* TODO: AUTH */}
+      {/* <TouchableOpacity
         onPress={() => props.navigation.openDrawer()}
         style={styles.col1}
       >
@@ -14,7 +15,7 @@ const Header = props => {
           name="user-circle-o"
           color="#316d3f"
         />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       <View style={styles.col2}>
         <Image source={logo} style={styles.headerLogo} />
       </View>
@@ -25,16 +26,16 @@ const styles = StyleSheet.create({
   header: {
     flex: 1,
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "center",
   },
   col1: { flexDirection: "row", flexBasis: "35%" },
-  col2: { flexDirection: "row", flexBasis: "60%" },
+  col2: { flexDirection: "row", flexBasis: "100%", justifyContent: "center" },
   headerLogo: {
     width: 90,
-    height: 35
+    height: 35,
   },
   userIcon: {
-    fontSize: 25
-  }
+    fontSize: 25,
+  },
 });
 export default Header;

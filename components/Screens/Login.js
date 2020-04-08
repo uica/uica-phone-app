@@ -13,6 +13,8 @@ import Loading from "./Loading";
 import { AuthSession } from "expo";
 import env from "../../env";
 import axios from "axios";
+import * as AppleAuthentication from "expo-apple-authentication";
+
 const Login = ({ setLoggedIn, setUser, setToken }) => {
   const [loading, setLoading] = useState(false);
 
@@ -119,6 +121,25 @@ const Login = ({ setLoggedIn, setUser, setToken }) => {
     }
   };
 
+  const handleAppleSignIn = async () => {
+    try {
+      const credential = await AppleAuthentication.signInAsync({
+        requestedScopes: [
+          AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
+          AppleAuthentication.AppleAuthenticationScope.EMAIL,
+        ],
+      });
+
+      // signed in
+    } catch (e) {
+      if (e.code === "ERR_CANCELED") {
+        // handle that the user canceled the sign-in flow
+      } else {
+        // handle other errors
+      }
+    }
+  };
+
   return loading ? (
     <Loading />
   ) : (
@@ -134,6 +155,13 @@ const Login = ({ setLoggedIn, setUser, setToken }) => {
           <FontAwesome name="google" style={styles.googleIcon} />
           <Text style={styles.googleText}>Sign in with Google</Text>
         </TouchableOpacity>
+        <AppleAuthentication.AppleAuthenticationButton
+          buttonType={AppleAuthentication.AppleAuthenticationButtonType.SIGN_IN}
+          buttonStyle={AppleAuthentication.AppleAuthenticationButtonStyle.BLACK}
+          cornerRadius={5}
+          style={styles.appleBtn}
+          onPress={handleAppleSignIn}
+        />
       </View>
     </ImageBackground>
   );
@@ -190,6 +218,11 @@ const styles = StyleSheet.create({
   googleIcon: {
     color: "#fff",
     fontSize: 30,
+  },
+  appleBtn: {
+    width: "100%",
+    height: 50,
+    marginTop: 5,
   },
 });
 export default Login;
