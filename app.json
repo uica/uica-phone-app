@@ -19,6 +19,7 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "bundleIdentifier": "com.uica.app",
+      "buildNumber": "2",
       "supportsTablet": true,
       "usesAppleSignIn": true
     },
