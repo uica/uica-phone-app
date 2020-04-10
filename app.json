@@ -5,7 +5,7 @@
     "privacy": "public",
     "sdkVersion": "36.0.0",
     "platforms": ["ios", "android", "web"],
-    "version": "1.0.1",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -19,12 +19,13 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "bundleIdentifier": "com.uica.app",
-      "buildNumber": "2",
+      "buildNumber": "3",
       "supportsTablet": true,
       "usesAppleSignIn": true
     },
     "android": {
-      "package": "com.uica.app"
+      "package": "com.uica.app",
+      "versionCode": 2
     }
   }
 }
