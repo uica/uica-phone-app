@@ -23,18 +23,15 @@ const Home = (props) => {
 
     axios
       .get(`${apiUrl}/prayers`)
-      .then(({ data }) => {
+      .then(({ data: { data } }) => {
         const now = moment();
         let nextPrayer = {};
         for (let p of data) {
-          if (
-            p.prayerName !== "JUMU'AH" &&
-            now.isBefore(moment(p.time, "HH:mm"))
-          ) {
+          if (p.name !== "JUMU'AH" && now.isBefore(moment(p.time, "HH:mm"))) {
             nextPrayer = p;
             break;
           } else {
-            nextPrayer = data.find((p) => p.prayerName === "FAJR");
+            nextPrayer = data.find((p) => p.name === "FAJR");
           }
         }
         setNextPrayer(nextPrayer);
@@ -56,7 +53,7 @@ const Home = (props) => {
         <Text style={styles.headerText}>Next Prayer</Text>
       </View>
       <View style={styles.nextPrayerContainer}>
-        <Text style={styles.nextPrayerNameText}>{nextPrayer.prayerName}</Text>
+        <Text style={styles.nextPrayerNameText}>{nextPrayer.name}</Text>
         <Text style={styles.nextPrayerTimeText}>{twelve(nextPrayer.time)}</Text>
       </View>
     </View>

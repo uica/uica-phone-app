@@ -5,7 +5,7 @@ const Prayer = ({ prayer }) => {
   return (
     <View style={styles.prayerContainer}>
       <View style={styles.prayerItem}>
-        <Text style={styles.prayerName}>{prayer.prayerName}</Text>
+        <Text style={styles.prayerName}>{prayer.name}</Text>
       </View>
       <View style={styles.prayerItem}>
         <Text style={styles.prayerTime}>{twelve(prayer.time)}</Text>
@@ -24,19 +24,19 @@ const styles = StyleSheet.create({
     borderColor: "#fff",
     shadowColor: "#aaa",
     shadowOpacity: 0.2,
-    shadowOffset: { height: 1, width: 1 }
+    shadowOffset: { height: 1, width: 1 },
   },
   prayerItem: {
-    flex: 1
+    flex: 1,
   },
   prayerName: {
     fontSize: 18,
-    textAlign: "left"
+    textAlign: "left",
   },
   prayerTime: {
     fontSize: 18,
-    textAlign: "right"
-  }
+    textAlign: "right",
+  },
 });
 
 export default Prayer;

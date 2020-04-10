@@ -25,7 +25,7 @@ const Prayers = () => {
     const { apiUrl } = env();
     axios
       .get(`${apiUrl}/prayers`)
-      .then(({ data }) => {
+      .then(({ data: { data } }) => {
         setPrayers(data);
         setRefreshing(false);
         setLoading(false);
