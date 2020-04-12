@@ -10,13 +10,7 @@ import { Platform } from "react-native";
 const localhost = Platform.OS === "ios" ? "localhost:8080" : "10.0.2.2:8080";
 
 const ENV = {
-  dev: {
-    apiUrl: "",
-    FB_ID: "",
-    GOOGLE_CLIENT_ID: "",
-    GOOGLE_CLIENT_SECRET: "",
-  },
-  staging: {
+  development: {
     apiUrl: "",
     FB_ID: "",
     GOOGLE_CLIENT_ID: "",
@@ -35,12 +29,9 @@ const getEnvVars = (env = Constants.manifest.releaseChannel) => {
   // This variable is set to true when react-native is running in Dev mode.
   // __DEV__ is true when run locally, but false when published.
   if (__DEV__) {
-    return ENV.dev;
-  } else if (env === "staging") {
-    return ENV.staging;
+    return ENV.development;
   } else if (env === "production") {
     return ENV.production;
   }
 };
-
 export default getEnvVars;
