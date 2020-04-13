@@ -5,14 +5,16 @@ import {
   TouchableOpacity,
   Text,
   ActivityIndicator,
-  Alert
+  Alert,
 } from "react-native";
 import { CreditCardInput } from "react-native-credit-card-input";
 import axios from "axios";
 import CCFront from "../../assets/CCFront.png";
 import CCBack from "../../assets/CCBack.png";
 import env from "../../env";
-const stripe = require("stripe-client")("pk_test_Swt5BnmK3zJKYgUxVZckS2iW");
+const stripe = require("stripe-client")(
+  "pk_test_eFhv63saelXFMcMdelXpmgiI005wcvWRU1"
+);
 
 const Payment = ({ navigation, route }) => {
   const [cardInfo, setCardInfo] = useState({});
@@ -31,10 +33,10 @@ const Payment = ({ navigation, route }) => {
           number: number.replace(/ /g, ""),
           exp_month,
           exp_year: `20${exp_year}`,
-          cvc
-        }
+          cvc,
+        },
       })
-      .catch(error => {
+      .catch((error) => {
         console.log("something went wrong", error);
         setLoading(false);
       });
@@ -42,9 +44,9 @@ const Payment = ({ navigation, route }) => {
     const { data } = await axios
       .post(`${apiUrl}/charge`, {
         token,
-        ...route.params
+        ...route.params,
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
         setLoading(false);
       });
@@ -62,9 +64,9 @@ const Payment = ({ navigation, route }) => {
         {
           text: "Cancel",
           onPress: () => console.log("Canceled"),
-          style: "cancel"
+          style: "cancel",
         },
-        { text: "Pay", onPress: () => handlePayment() }
+        { text: "Pay", onPress: () => handlePayment() },
       ],
       { cancelable: false }
     );
@@ -75,14 +77,14 @@ const Payment = ({ navigation, route }) => {
         requiresName={true}
         cardImageFront={CCFront}
         cardImageBack={CCBack}
-        onChange={cardInfo => setCardInfo(cardInfo)}
+        onChange={(cardInfo) => setCardInfo(cardInfo)}
         validColor="#52ae67"
         inputContainerStyle={{
           borderBottomColor: "#316d3f",
-          borderBottomWidth: 1
+          borderBottomWidth: 1,
         }}
         labelStyle={{
-          color: "#316d3f"
+          color: "#316d3f",
         }}
       />
       <View style={styles.checkoutBtnContainer}>
@@ -101,17 +103,17 @@ const Payment = ({ navigation, route }) => {
 };
 const styles = StyleSheet.create({
   paymentContainer: {
-    paddingVertical: 20
+    paddingVertical: 20,
   },
   input: {
     padding: 10,
     borderWidth: 1,
     borderColor: "#ddd",
     borderRadius: 3,
-    marginVertical: 5
+    marginVertical: 5,
   },
   checkoutBtnContainer: {
-    padding: 20
+    padding: 20,
   },
   checkoutBtn: {
     width: "100%",
@@ -120,12 +122,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 5,
-    alignSelf: "center"
+    alignSelf: "center",
   },
   checkoutText: {
     color: "white",
-    fontWeight: "bold"
-  }
+    fontWeight: "bold",
+  },
 });
 
 export default Payment;

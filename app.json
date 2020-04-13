@@ -19,13 +19,13 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "bundleIdentifier": "com.uica.app",
-      "buildNumber": "3",
+      "buildNumber": "4",
       "supportsTablet": true,
       "usesAppleSignIn": true
     },
     "android": {
       "package": "com.uica.app",
-      "versionCode": 2
+      "versionCode": 3
     }
   }
 }
