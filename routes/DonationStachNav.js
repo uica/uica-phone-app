@@ -5,7 +5,7 @@ import {
   Payment,
   BillingInfo,
   Amount,
-  PaymentComplete
+  PaymentComplete,
 } from "../components/Screens";
 import Header from "../components/Shared/Header";
 const Stack = createStackNavigator();
@@ -15,8 +15,8 @@ function DonationStack(props) {
     <Stack.Navigator
       screenOptions={{
         headerTintColor: "white",
-        headerStyle: { backgroundColor: "#52ae67", height: 80 },
-        headerBackTitleVisible: false
+        headerStyle: { backgroundColor: "#52ae67", height: 100 },
+        headerBackTitleVisible: false,
       }}
     >
       <Stack.Screen
@@ -25,7 +25,7 @@ function DonationStack(props) {
           title: "Donation",
           headerTitle: () => <Header {...props} />,
           headerTitleAlign: "center",
-          headerTitleStyle: { fontSize: 20 }
+          headerTitleStyle: { fontSize: 20 },
         }}
         component={Donation}
       />
@@ -34,7 +34,7 @@ function DonationStack(props) {
         options={{
           title: "Amount",
           headerTitleAlign: "center",
-          headerTitleStyle: { fontSize: 20 }
+          headerTitleStyle: { fontSize: 20 },
         }}
         component={Amount}
       />
@@ -43,7 +43,7 @@ function DonationStack(props) {
         options={{
           title: "Billing Information",
           headerTitleAlign: "center",
-          headerTitleStyle: { fontSize: 20 }
+          headerTitleStyle: { fontSize: 20 },
         }}
         component={BillingInfo}
       />
@@ -52,7 +52,7 @@ function DonationStack(props) {
         options={{
           title: "Make Payment",
           headerTitleAlign: "center",
-          headerTitleStyle: { fontSize: 20 }
+          headerTitleStyle: { fontSize: 20 },
         }}
         component={Payment}
       />
@@ -63,7 +63,7 @@ function DonationStack(props) {
           headerTitleAlign: "center",
           headerTitleStyle: { fontSize: 20 },
           headerLeft: false,
-          gestureEnabled: false
+          gestureEnabled: false,
         }}
         component={PaymentComplete}
       />

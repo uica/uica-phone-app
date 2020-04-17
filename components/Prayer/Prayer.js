@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     padding: 15,
     flexDirection: "row",
     borderWidth: 1,
-    opacity: 0.8,
+    opacity: 1,
     borderColor: "#fff",
     shadowColor: "#aaa",
     shadowOpacity: 0.2,

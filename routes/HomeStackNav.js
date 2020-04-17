@@ -11,8 +11,8 @@ function HomeStack(props) {
         headerTintColor: "white",
         headerStyle: {
           backgroundColor: "#52ae67",
-          height: 80
-        }
+          height: 100,
+        },
       }}
     >
       <Stack.Screen
@@ -21,7 +21,7 @@ function HomeStack(props) {
           title: "UICA",
           headerTitle: () => <Header {...props} />,
           headerTitleAlign: "center",
-          headerTitleStyle: { fontSize: 28 }
+          headerTitleStyle: { fontSize: 28 },
         }}
         component={Home}
       />
