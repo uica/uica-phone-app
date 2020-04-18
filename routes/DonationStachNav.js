@@ -6,6 +6,7 @@ import {
   BillingInfo,
   Amount,
   PaymentComplete,
+  PaymentOptions,
 } from "../components/Screens";
 import Header from "../components/Shared/Header";
 const Stack = createStackNavigator();
@@ -37,6 +38,16 @@ function DonationStack(props) {
           headerTitleStyle: { fontSize: 20 },
         }}
         component={Amount}
+      />
+      <Stack.Screen
+        name="paymentOptions"
+        options={{
+          title: "Payment Options",
+          headerTitle: () => <Header {...props} />,
+          headerTitleAlign: "center",
+          headerTitleStyle: { fontSize: 20 },
+        }}
+        component={PaymentOptions}
       />
       <Stack.Screen
         name="billingInfo"

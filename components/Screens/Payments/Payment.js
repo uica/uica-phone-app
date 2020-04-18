@@ -9,9 +9,9 @@ import {
 } from "react-native";
 import { CreditCardInput } from "react-native-credit-card-input";
 import axios from "axios";
-import CCFront from "../../assets/CCFront.png";
-import CCBack from "../../assets/CCBack.png";
-import env from "../../env";
+import CCFront from "../../../assets/CCFront.png";
+import CCBack from "../../../assets/CCBack.png";
+import env from "../../../env";
 const stripe = require("stripe-client")(
   "pk_live_Mplks5zixAYELuIjYXp1873o00SstjVJXl"
 );
@@ -29,6 +29,7 @@ const Payment = ({ navigation, route }) => {
     );
     setLoading(false);
   };
+
   const handlePayment = async () => {
     const { apiUrl } = env();
     setLoading(true);

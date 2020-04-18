@@ -38,9 +38,9 @@ const Amount = ({ navigation, route }) => {
 
   const handleContinue = () => {
     if (total === 0) {
-      alert("Add money");
+      alert("Please select an amount");
     } else {
-      navigation.navigate("billingInfo", {
+      navigation.navigate("paymentOptions", {
         total,
         ...route.params,
       });

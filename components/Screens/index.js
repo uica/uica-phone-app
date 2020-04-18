@@ -1,9 +1,10 @@
 export { default as Loading } from "./Loading";
 export { default as Home } from "./Home";
 export { default as Prayers } from "./Prayers";
-export { default as Donation } from "./Donation";
-export { default as BillingInfo } from "./BillingInfo";
-export { default as Payment } from "./Payment";
-export { default as Amount } from "./Amount";
-export { default as PaymentComplete } from "./PaymentComplete";
+export { default as Donation } from "./Payments/Donation";
+export { default as BillingInfo } from "./Payments/BillingInfo";
+export { default as Payment } from "./Payments/Payment";
+export { default as Amount } from "./Payments/Amount";
+export { default as PaymentComplete } from "./Payments/PaymentComplete";
+export { default as PaymentOptions } from "./Payments/PaymentOptions";
 export { default as Login } from "./Login";

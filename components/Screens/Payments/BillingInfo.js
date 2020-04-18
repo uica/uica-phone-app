@@ -7,24 +7,21 @@ import {
   TextInput,
   TouchableOpacity,
   Keyboard,
-  Picker
+  Picker,
 } from "react-native";
 import * as yup from "yup";
-import states from "../../utils/states";
+import states from "../../../utils/states";
 import { Formik } from "formik";
 const BillingInfo = ({ navigation, route }) => {
   const validationSchema = yup.object().shape({
-    email: yup
-      .string()
-      .email()
-      .required(),
+    email: yup.string().email().required(),
     firstName: yup.string().required(),
     lastName: yup.string().required(),
     address: yup.string().required(),
     city: yup.string().required(),
     state: yup.string().required(),
     zipCode: yup.number().required(),
-    phoneNumber: yup.number().required()
+    phoneNumber: yup.number().required(),
   });
   const initialValues = {
     email: "",
@@ -34,13 +31,13 @@ const BillingInfo = ({ navigation, route }) => {
     city: "",
     state: "",
     zipCode: "",
-    phoneNumber: ""
+    phoneNumber: "",
   };
 
-  const handleSubmit = values => {
+  const handleSubmit = (values) => {
     navigation.navigate("payment", {
       billingInfo: values,
-      ...route.params
+      ...route.params,
     });
   };
 
@@ -49,7 +46,7 @@ const BillingInfo = ({ navigation, route }) => {
       <Formik
         validationSchema={validationSchema}
         initialValues={initialValues}
-        onSubmit={values => handleSubmit(values)}
+        onSubmit={(values) => handleSubmit(values)}
       >
         {({
           handleChange,
@@ -57,7 +54,7 @@ const BillingInfo = ({ navigation, route }) => {
           values,
           setFieldValue,
           errors,
-          touched
+          touched,
         }) => (
           <View>
             <TextInput
@@ -167,7 +164,7 @@ const BillingInfo = ({ navigation, route }) => {
 };
 const styles = StyleSheet.create({
   formContainer: {
-    padding: 10
+    padding: 10,
   },
   input: {
     padding: 10,
@@ -176,7 +173,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#cceeff",
     borderRadius: 5,
-    fontSize: 16
+    fontSize: 16,
   },
   inputError: {
     padding: 10,
@@ -185,7 +182,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#D8000C",
     borderRadius: 5,
-    fontSize: 16
+    fontSize: 16,
   },
   states: {
     backgroundColor: "#fff",
@@ -193,7 +190,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#cceeff",
     borderRadius: 5,
-    fontSize: 16
+    fontSize: 16,
   },
   stateError: {
     backgroundColor: "#fff",
@@ -201,7 +198,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#D8000C",
     borderRadius: 5,
-    fontSize: 16
+    fontSize: 16,
   },
   continueBtn: {
     width: "100%",
@@ -211,11 +208,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 5,
-    alignSelf: "center"
+    alignSelf: "center",
   },
   continueText: {
     color: "white",
-    fontWeight: "bold"
-  }
+    fontWeight: "bold",
+  },
 });
 export default BillingInfo;

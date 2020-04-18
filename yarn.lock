@@ -2334,6 +2334,13 @@ expo-location@~8.0.0:
   dependencies:
     invariant "^2.2.4"
 
+expo-payments-stripe@~8.0.0:
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/expo-payments-stripe/-/expo-payments-stripe-8.0.1.tgz#8853a01644819cdf1ae51aad60cfcb891586cc56"
+  integrity sha512-47jaD98J+UDRKoI6otMc3y6K4qYZdrWwt1Y8cFwwyzBdrbz18a9A87qayBXAHCYkQnCqLSiTeETwQ0qyVAoHFw==
+  dependencies:
+    prop-types "^15.6.0"
+
 expo-permissions@~8.0.0:
   version "8.0.0"
   resolved "https://registry.yarnpkg.com/expo-permissions/-/expo-permissions-8.0.0.tgz#5a45e8451dd7ff37c9e6ce5e2447818372547813"
@@ -3791,6 +3798,11 @@ mkdirp@^0.5.1:
   integrity sha1-MAV0OOrGz3+MR2fzhkjWaX11yQM=
   dependencies:
     minimist "0.0.8"
+
+moment@^2.24.0:
+  version "2.24.0"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
+  integrity sha512-bV7f+6l2QigeBBZSM/6yTNq4P2fNpSWj/0e7jQcy87A8e7o2nAfP/34/2ky5Vw4B9S446EtIhodAzkFCcR4dQg==
 
 morgan@^1.9.0:
   version "1.9.1"
