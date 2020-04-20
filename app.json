@@ -31,6 +31,7 @@
     "android": {
       "package": "com.uica.app",
       "versionCode": 4
-    }
+    },
+    "entryPoint": "node_modules/expo/AppEntry.js"
   }
 }
