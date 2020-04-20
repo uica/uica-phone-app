@@ -27,9 +27,15 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "center",
   },
   col1: { flexDirection: "row", flexBasis: "35%" },
-  col2: { flexDirection: "row", flexBasis: "100%", justifyContent: "center" },
+  col2: {
+    flexDirection: "row",
+    flexBasis: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
   headerLogo: {
     width: 90,
     height: 35,

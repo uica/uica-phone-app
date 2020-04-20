@@ -1,24 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   StyleSheet,
   View,
   Text,
   TouchableOpacity,
   FlatList,
-  Image
+  Image,
 } from "react-native";
-import sadaqa from "../../assets/sadaqa.png";
-import masjid from "../../assets/masjidIcon.png";
+import sadaqa from "../../../assets/sadaqa.png";
+import masjid from "../../../assets/masjidIcon.png";
+
 const Donation = ({ navigation }) => {
-  const [donations, setDonations] = useState([
+  const donations = [
     { id: 1, name: "General", icon: sadaqa },
-    { id: 2, name: "Masjid Expansion", icon: masjid }
-  ]);
+    { id: 2, name: "Masjid Expansion", icon: masjid },
+  ];
   return (
     <View>
       <Text style={styles.title}>Select type of donation</Text>
       <FlatList
-        keyExtractor={item => item.id.toString()}
+        keyExtractor={(item) => item.id.toString()}
         data={donations}
         renderItem={({ item }) => (
           <TouchableOpacity
@@ -41,7 +42,7 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     fontSize: 18,
     fontWeight: "bold",
-    textAlign: "center"
+    textAlign: "center",
   },
   itemContainer: {
     elevation: 3,
@@ -53,12 +54,12 @@ const styles = StyleSheet.create({
     shadowColor: "#aaa",
     shadowOffset: { height: 1, width: 1 },
     shadowOpacity: 0.4,
-    shadowRadius: 1
+    shadowRadius: 1,
   },
   icon: {
     width: 30,
     height: 30,
-    marginHorizontal: 20
-  }
+    marginHorizontal: 20,
+  },
 });
 export default Donation;

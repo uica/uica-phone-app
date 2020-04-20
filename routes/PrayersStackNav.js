@@ -9,7 +9,7 @@ function PrayersStack(props) {
     <Stack.Navigator
       screenOptions={{
         headerTintColor: "white",
-        headerStyle: { backgroundColor: "#52ae67", height: 80 }
+        headerStyle: { backgroundColor: "#52ae67", height: 100 },
       }}
     >
       <Stack.Screen
@@ -18,7 +18,7 @@ function PrayersStack(props) {
           title: "PRAYER TIME",
           headerTitle: () => <Header {...props} />,
           headerTitleAlign: "center",
-          headerTitleStyle: { fontSize: 20 }
+          headerTitleStyle: { fontSize: 20 },
         }}
         component={Prayers}
       />

@@ -7,7 +7,7 @@ import {
   ImageBackground,
 } from "react-native";
 import Prayer from "../Prayer/Prayer";
-import masjibBG from "../../assets/prayersBG.jpg";
+import masjibBG from "../../assets/prayers2BG.png";
 import Loading from "./Loading";
 import axios from "axios";
 import env from "../../env";

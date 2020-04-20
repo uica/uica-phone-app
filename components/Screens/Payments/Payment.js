@@ -9,16 +9,26 @@ import {
 } from "react-native";
 import { CreditCardInput } from "react-native-credit-card-input";
 import axios from "axios";
-import CCFront from "../../assets/CCFront.png";
-import CCBack from "../../assets/CCBack.png";
-import env from "../../env";
+import CCFront from "../../../assets/CCFront.png";
+import CCBack from "../../../assets/CCBack.png";
+import env from "../../../env";
 const stripe = require("stripe-client")(
-  "pk_test_eFhv63saelXFMcMdelXpmgiI005wcvWRU1"
+  "pk_live_Mplks5zixAYELuIjYXp1873o00SstjVJXl"
 );
 
 const Payment = ({ navigation, route }) => {
   const [cardInfo, setCardInfo] = useState({});
   const [loading, setLoading] = useState(false);
+
+  const alertError = () => {
+    Alert.alert(
+      "Something went wrong",
+      `Your payment did not process successfully. Please try again.`,
+      [{ text: "Close", onPress: () => console.log("Closed") }],
+      { cancelable: false }
+    );
+    setLoading(false);
+  };
 
   const handlePayment = async () => {
     const { apiUrl } = env();
@@ -38,7 +48,7 @@ const Payment = ({ navigation, route }) => {
       })
       .catch((error) => {
         console.log("something went wrong", error);
-        setLoading(false);
+        alertError();
       });
 
     const { data } = await axios
@@ -47,13 +57,15 @@ const Payment = ({ navigation, route }) => {
         ...route.params,
       })
       .catch((error) => {
-        console.log(error);
-        setLoading(false);
+        console.log("something went wrong", error);
+        alertError();
       });
     if (data.success) {
+      setLoading(false);
       navigation.navigate("paymentComplete", { receipt: data.receipt_url });
+    } else {
+      alertError();
     }
-    setLoading(false);
   };
 
   const handleConfirmPayment = () => {
