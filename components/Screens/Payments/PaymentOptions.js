@@ -1,5 +1,11 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Platform,
+} from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 const PaymentOptions = ({ navigation, route }) => {
   const handleSubmit = () => {
@@ -9,21 +15,22 @@ const PaymentOptions = ({ navigation, route }) => {
   };
   return (
     <View>
-      <Text style={styles.title}>Donations</Text>
+      <Text style={styles.title}>Choose your type of payment</Text>
       <View style={styles.pageContainer}>
-        <Text style={styles.label}>Choose your type of payment</Text>
         <TouchableOpacity onPress={handleSubmit}>
           <View style={styles.debitCard}>
             <FontAwesome style={styles.icon} name="credit-card-alt" />
             <Text style={styles.btnText}>Debit/Credit Card</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity>
-          <View style={styles.applePay}>
-            <FontAwesome style={styles.icon} name="apple" />
-            <Text style={styles.btnText}>Pay</Text>
-          </View>
-        </TouchableOpacity>
+        {Platform.OS === "ios" && (
+          <TouchableOpacity>
+            <View style={styles.applePay}>
+              <FontAwesome style={styles.icon} name="apple" />
+              <Text style={styles.btnText}>Pay</Text>
+            </View>
+          </TouchableOpacity>
+        )}
       </View>
     </View>
   );
@@ -42,10 +49,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
   },
-  label: {
-    textAlign: "center",
-    paddingBottom: 15,
-  },
+
   debitCard: {
     backgroundColor: "#52ae67",
     elevation: 3,
