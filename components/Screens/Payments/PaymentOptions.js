@@ -5,13 +5,101 @@ import {
   StyleSheet,
   TouchableOpacity,
   Platform,
+  Alert,
+  NativeModules,
 } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
+import { PaymentRequest } from "react-native-payments";
+import axios from "axios";
+import env from "../../../env";
+
 const PaymentOptions = ({ navigation, route }) => {
   const handleSubmit = () => {
     navigation.navigate("billingInfo", {
       ...route.params,
     });
+  };
+
+  const handleApplePay = async () => {
+    const { apiUrl } = env();
+    const METHOD_DATA = [
+      {
+        supportedMethods: ["apple-pay"],
+        data: {
+          merchantIdentifier: "merchant.org.uica",
+          supportedNetworks: ["visa", "mastercard", "amex"],
+          countryCode: "US",
+          currencyCode: "USD",
+          paymentMethodTokenizationParameters: {
+            parameters: {
+              gateway: "stripe",
+              "stripe:publishableKey":
+                "pk_test_eFhv63saelXFMcMdelXpmgiI005wcvWRU1",
+              "stripe:version": "5.0.0",
+            },
+          },
+        },
+      },
+    ];
+    const DETAILS = {
+      id: route.params.description,
+      displayItems: [
+        {
+          label: `${route.params.description} - Donation`,
+          amount: { currency: "USD", value: route.params.total },
+        },
+      ],
+      total: {
+        label: "UICA",
+        amount: { currency: "USD", value: route.params.total },
+      },
+    };
+    // # Don't work
+    // const OPTIONS = {
+    //   requestPayerName: true,
+    //   requestPayerPhone: true,
+    //   requestPayerEmail: true,
+    // };
+
+    const paymentRequest = new PaymentRequest(METHOD_DATA, DETAILS);
+    paymentRequest
+      .canMakePayments()
+      .then((canMakePayment) => {
+        if (!canMakePayment) {
+          Alert.alert("Apple Pay", "Apple Pay is not available in this device");
+          return;
+        }
+        paymentRequest
+          .show()
+          .then((paymentResponse) => {
+            const { paymentToken } = paymentResponse.details;
+
+            axios
+              .post(`${apiUrl}/charge/applePay`, {
+                token: paymentToken,
+                ...route.params,
+              })
+              .then(({ data }) => {
+                if (data.success) {
+                  paymentResponse.complete("success");
+                } else {
+                  Alert.alert(
+                    "Apple Pay",
+                    "Something went wrong!. please try again or use our other payment options"
+                  );
+                  paymentRequest.abort();
+                }
+              })
+              .catch((error) => {
+                paymentRequest.abort();
+                console.log("something went wrong", error);
+              });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })
+      .catch((error) => console.log(error));
   };
   return (
     <View>
@@ -24,7 +112,7 @@ const PaymentOptions = ({ navigation, route }) => {
           </View>
         </TouchableOpacity>
         {Platform.OS === "ios" && (
-          <TouchableOpacity>
+          <TouchableOpacity onPress={handleApplePay}>
             <View style={styles.applePay}>
               <FontAwesome style={styles.icon} name="apple" />
               <Text style={styles.btnText}>Pay</Text>
