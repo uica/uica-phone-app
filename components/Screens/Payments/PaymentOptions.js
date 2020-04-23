@@ -34,7 +34,7 @@ const PaymentOptions = ({ navigation, route }) => {
             parameters: {
               gateway: "stripe",
               "stripe:publishableKey":
-                "pk_test_eFhv63saelXFMcMdelXpmgiI005wcvWRU1",
+                "pk_live_Mplks5zixAYELuIjYXp1873o00SstjVJXl",
               "stripe:version": "5.0.0",
             },
           },
