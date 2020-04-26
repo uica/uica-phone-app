@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		0731D3B824204D62009CAE85 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0731D3B524204D62009CAE85 /* Expo.plist */; };
 		074F4BDC2432833400BDB9FE /* app.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 07C2E6E4243282B30028AF0A /* app.bundle */; };
@@ -116,14 +117,6 @@
 				13B07F961A680F5B00A75B9A /* app.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		FABEBEFB0DFC494B81AE624A /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
-			path = /Users/muhammad.aljuburi/myprojects/uica-projects/uica-phone-app/node_modules/react-native-payments-addon-stripe/Carthage/Build/iOS;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -328,7 +321,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = UICA/app.entitlements;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = Z637UM9CRL;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native-payments-addon-stripe/Carthage/Build/iOS/";
@@ -341,6 +334,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.uica.app;
 				PRODUCT_NAME = app;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -351,7 +345,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = UICA/app.entitlements;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = Z637UM9CRL;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../node_modules/react-native-payments-addon-stripe/Carthage/Build/iOS/";
@@ -364,6 +358,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.uica.app;
 				PRODUCT_NAME = app;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

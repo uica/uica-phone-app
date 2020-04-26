@@ -21,7 +21,7 @@ const PaymentOptions = ({ navigation, route }) => {
   };
 
   const handleApplePay = async () => {
-    const { apiUrl } = env();
+    const { apiUrl } = "https://uica-rest-v103.herokuapp.com/api";
     const METHOD_DATA = [
       {
         supportedMethods: ["apple-pay"],

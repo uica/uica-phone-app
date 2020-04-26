@@ -7,7 +7,7 @@ import env from "../../env";
 import moment from "moment";
 import twelve from "twentyfour-to-twelve";
 const Home = (props) => {
-  const { apiUrl } = env();
+  const { apiUrl } = "https://uica-rest-v103.herokuapp.com/api";
   const [images, setImages] = useState([]);
   const [nextPrayer, setNextPrayer] = useState("00:00");
   const [loading, setLoading] = useState(true);

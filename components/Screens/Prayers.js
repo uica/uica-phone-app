@@ -22,7 +22,7 @@ const Prayers = () => {
   }, []);
 
   const fetchPrayers = () => {
-    const { apiUrl } = env();
+    const { apiUrl } = "https://uica-rest-v103.herokuapp.com/api";
     axios
       .get(`${apiUrl}/prayers`)
       .then(({ data: { data } }) => {

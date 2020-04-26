@@ -31,7 +31,7 @@ const Payment = ({ navigation, route }) => {
   };
 
   const handlePayment = async () => {
-    const { apiUrl } = env();
+    const { apiUrl } = "https://uica-rest-v103.herokuapp.com/api";
     setLoading(true);
     const { number, name, cvc, expiry } = cardInfo.values;
     const [exp_month, exp_year] = expiry.split("/");
