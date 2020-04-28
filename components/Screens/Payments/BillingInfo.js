@@ -58,6 +58,7 @@ const BillingInfo = ({ navigation, route }) => {
               onChangeText={handleChange("firstName")}
               value={values.firstName}
               placeholder="First Name"
+              placeholderTextColor="#ccc"
             />
             <TextInput
               style={
@@ -68,6 +69,7 @@ const BillingInfo = ({ navigation, route }) => {
               onChangeText={handleChange("lastName")}
               value={values.lastName}
               placeholder="Last Name"
+              placeholderTextColor="#ccc"
             />
             <TextInput
               style={
@@ -78,6 +80,7 @@ const BillingInfo = ({ navigation, route }) => {
               onChangeText={handleChange("email")}
               value={values.email}
               placeholder="Email"
+              placeholderTextColor="#ccc"
             />
             <TextInput
               style={
@@ -90,6 +93,7 @@ const BillingInfo = ({ navigation, route }) => {
               onChangeText={handleChange("phoneNumber")}
               value={values.phoneNumber}
               placeholder="Phone number"
+              placeholderTextColor="#ccc"
             />
 
             <TouchableOpacity onPress={handleSubmit}>
@@ -114,6 +118,7 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     borderWidth: 1,
     borderColor: "#cceeff",
+    color: "#000",
     borderRadius: 5,
     fontSize: 16,
   },

@@ -4,7 +4,7 @@ import {
   View,
   Text,
   TouchableOpacity,
-  FlatList,
+  ScrollView,
   TextInput,
   SafeAreaView,
 } from "react-native";
@@ -37,49 +37,55 @@ const Donation = ({ navigation }) => {
     navigation.navigate("billingInfo", data);
   };
   return (
-    <SafeAreaView>
+    <ScrollView>
       <Text style={styles.title}>Select type of donation</Text>
       <View>
-        <FlatList
-          keyExtractor={(item) => item.id.toString()}
-          data={donations}
-          renderItem={({ item }) => (
-            <TouchableOpacity onPress={() => handleSelect(item)}>
-              <View
+        {donations.map((item) => (
+          <TouchableOpacity key={item.id} onPress={() => handleSelect(item)}>
+            <View
+              style={
+                selected && selected.id === item.id
+                  ? styles.itemSelected
+                  : styles.itemContainer
+              }
+            >
+              <Text
                 style={
-                  selected && selected.id === item.id
-                    ? styles.itemSelected
-                    : styles.itemContainer
+                  selected && selected.id === item.id && styles.selectedText
                 }
               >
-                <Text
-                  style={
-                    selected && selected.id === item.id && styles.selectedText
-                  }
-                >
-                  {item.name}
-                </Text>
-              </View>
-            </TouchableOpacity>
-          )}
-        />
+                {item.name}
+              </Text>
+            </View>
+          </TouchableOpacity>
+        ))}
       </View>
       {selected && selected.name === "Other" && (
-        <TextInput
-          onChangeText={(text) => setOtherType(text)}
-          style={styles.input}
-          placeholder="Describe your type of donation"
-          value={otherType}
-        />
+        <View style={styles.textBoxContainer}>
+          <TextInput
+            onChangeText={(text) => setOtherType(text)}
+            style={styles.input}
+            placeholder="Describe your type of donation"
+            placeholderTextColor="#aaa"
+            value={otherType}
+          />
+        </View>
       )}
       {selected && (
-        <TouchableOpacity onPress={handleContinue}>
-          <View style={styles.continue}>
-            <Text style={{ color: "#fff", fontWeight: "bold" }}>Continue</Text>
-          </View>
-        </TouchableOpacity>
+        <View style={{ padding: 10 }}>
+          <TouchableOpacity
+            style={{ marginBottom: 200 }}
+            onPress={handleContinue}
+          >
+            <View style={styles.continue}>
+              <Text style={{ color: "#fff", fontWeight: "bold" }}>
+                Continue
+              </Text>
+            </View>
+          </TouchableOpacity>
+        </View>
       )}
-    </SafeAreaView>
+    </ScrollView>
   );
 };
 const styles = StyleSheet.create({
@@ -101,6 +107,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.4,
     shadowRadius: 1,
   },
+  textBoxContainer: {
+    padding: 10,
+  },
+
   itemSelected: {
     elevation: 3,
     padding: 20,
@@ -118,20 +128,19 @@ const styles = StyleSheet.create({
   },
   continue: {
     elevation: 3,
-    padding: 20,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    marginVertical: 25,
+    width: "100%",
+    padding: 15,
+    marginVertical: 20,
     backgroundColor: "#52ae67",
-    shadowColor: "#aaa",
-    shadowOffset: { height: 1, width: 1 },
-    shadowOpacity: 0.4,
-    shadowRadius: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 5,
+    alignSelf: "center",
   },
   input: {
     padding: 10,
     backgroundColor: "#fff",
+    color: "#000",
     marginVertical: 5,
     borderWidth: 1,
     borderColor: "#cceeff",
