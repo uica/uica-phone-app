@@ -31,6 +31,15 @@ function DonationStack(props) {
         component={Donation}
       />
       <Stack.Screen
+        name="billingInfo"
+        options={{
+          title: "Contact Information",
+          headerTitleAlign: "center",
+          headerTitleStyle: { fontSize: 20 },
+        }}
+        component={BillingInfo}
+      />
+      <Stack.Screen
         name="amount"
         options={{
           title: "Amount",
@@ -43,21 +52,12 @@ function DonationStack(props) {
         name="paymentOptions"
         options={{
           title: "Payment Options",
-          headerTitle: () => <Header {...props} />,
           headerTitleAlign: "center",
           headerTitleStyle: { fontSize: 20 },
         }}
         component={PaymentOptions}
       />
-      <Stack.Screen
-        name="billingInfo"
-        options={{
-          title: "Billing Information",
-          headerTitleAlign: "center",
-          headerTitleStyle: { fontSize: 20 },
-        }}
-        component={BillingInfo}
-      />
+
       <Stack.Screen
         name="payment"
         options={{

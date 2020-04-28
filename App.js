@@ -4,9 +4,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import Drawer from "./components/Navigators/DrawerNavigator";
 import Tab from "./components/Navigators/TabNavigator";
 import { Login } from "./components/Screens";
-import env from "./env";
+import ENV from "./env";
 export default function App() {
-  const { apiUrl } = "https://uica-rest-v103.herokuapp.com/api";
+  const { apiUrl } = ENV();
   // TODO: AUTH: need to work more on the authentication part.
   // Setting loggedIn to true until resolved.
   const [loggedIn, setLoggedIn] = useState(true);

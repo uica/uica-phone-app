@@ -14,28 +14,20 @@ import states from "../../../utils/states";
 import { Formik } from "formik";
 const BillingInfo = ({ navigation, route }) => {
   const validationSchema = yup.object().shape({
-    email: yup.string().email().required(),
     firstName: yup.string().required(),
     lastName: yup.string().required(),
-    address: yup.string().required(),
-    city: yup.string().required(),
-    state: yup.string().required(),
-    zipCode: yup.number().required(),
+    email: yup.string().email().required(),
     phoneNumber: yup.number().required(),
   });
   const initialValues = {
-    email: "",
     firstName: "",
     lastName: "",
-    address: "",
-    city: "",
-    state: "",
-    zipCode: "",
+    email: "",
     phoneNumber: "",
   };
 
   const handleSubmit = (values) => {
-    navigation.navigate("payment", {
+    navigation.navigate("amount", {
       billingInfo: values,
       ...route.params,
     });
@@ -59,28 +51,6 @@ const BillingInfo = ({ navigation, route }) => {
           <View>
             <TextInput
               style={
-                errors.email && touched.email ? styles.inputError : styles.input
-              }
-              autoCompleteType="email"
-              keyboardType="email-address"
-              onChangeText={handleChange("email")}
-              value={values.email}
-              placeholder="Email"
-            />
-            <TextInput
-              style={
-                errors.phoneNumber && touched.phoneNumber
-                  ? styles.inputError
-                  : styles.input
-              }
-              autoCompleteType="tel"
-              keyboardType="phone-pad"
-              onChangeText={handleChange("phoneNumber")}
-              value={values.phoneNumber}
-              placeholder="Phone number"
-            />
-            <TextInput
-              style={
                 errors.firstName && touched.firstName
                   ? styles.inputError
                   : styles.input
@@ -101,55 +71,27 @@ const BillingInfo = ({ navigation, route }) => {
             />
             <TextInput
               style={
-                errors.address && touched.address
-                  ? styles.inputError
-                  : styles.input
+                errors.email && touched.email ? styles.inputError : styles.input
               }
-              onChangeText={handleChange("address")}
-              value={values.address}
-              placeholder="Street Address"
+              autoCompleteType="email"
+              keyboardType="email-address"
+              onChangeText={handleChange("email")}
+              value={values.email}
+              placeholder="Email"
             />
             <TextInput
               style={
-                errors.city && touched.city ? styles.inputError : styles.input
+                errors.phoneNumber && touched.phoneNumber
+                  ? styles.inputError
+                  : styles.input
               }
-              onChangeText={handleChange("city")}
-              value={values.city}
-              placeholder="City"
+              autoCompleteType="tel"
+              keyboardType="phone-pad"
+              onChangeText={handleChange("phoneNumber")}
+              value={values.phoneNumber}
+              placeholder="Phone number"
             />
-            <Picker
-              style={
-                errors.state && touched.state
-                  ? styles.stateError
-                  : styles.states
-              }
-              selectedValue={values.state}
-              onValueChange={(itemValue, itemIndex) =>
-                setFieldValue("state", itemValue)
-              }
-            >
-              <Picker.Item label="Select State" value="" />
-              {states.map((state, i) => (
-                <Picker.Item
-                  key={i}
-                  label={state.name}
-                  value={state.abbreviation}
-                />
-              ))}
-            </Picker>
-            <View>
-              <TextInput
-                keyboardType="numeric"
-                style={
-                  errors.zipCode && touched.zipCode
-                    ? styles.inputError
-                    : styles.input
-                }
-                onChangeText={handleChange("zipCode")}
-                value={values.zipCode}
-                placeholder="Zip Code"
-              />
-            </View>
+
             <TouchableOpacity onPress={handleSubmit}>
               <View style={styles.continueBtn}>
                 <Text style={styles.continueText}>Continue</Text>
@@ -181,14 +123,6 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     borderWidth: 1,
     borderColor: "#D8000C",
-    borderRadius: 5,
-    fontSize: 16,
-  },
-  states: {
-    backgroundColor: "#fff",
-    marginVertical: 5,
-    borderWidth: 1,
-    borderColor: "#cceeff",
     borderRadius: 5,
     fontSize: 16,
   },

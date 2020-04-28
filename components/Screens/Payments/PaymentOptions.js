@@ -11,17 +11,17 @@ import {
 import { FontAwesome } from "@expo/vector-icons";
 import { PaymentRequest } from "react-native-payments";
 import axios from "axios";
-import env from "../../../env";
+import ENV from "../../../env";
 
 const PaymentOptions = ({ navigation, route }) => {
   const handleSubmit = () => {
-    navigation.navigate("billingInfo", {
+    navigation.navigate("payment", {
       ...route.params,
     });
   };
 
   const handleApplePay = async () => {
-    const { apiUrl } = "https://uica-rest-v103.herokuapp.com/api";
+    const { apiUrl, STRIPE_PUB_KEY } = ENV();
     const METHOD_DATA = [
       {
         supportedMethods: ["apple-pay"],
@@ -33,8 +33,7 @@ const PaymentOptions = ({ navigation, route }) => {
           paymentMethodTokenizationParameters: {
             parameters: {
               gateway: "stripe",
-              "stripe:publishableKey":
-                "pk_live_Mplks5zixAYELuIjYXp1873o00SstjVJXl",
+              "stripe:publishableKey": STRIPE_PUB_KEY,
               "stripe:version": "5.0.0",
             },
           },
@@ -103,19 +102,19 @@ const PaymentOptions = ({ navigation, route }) => {
   };
   return (
     <View>
-      <Text style={styles.title}>Choose your type of payment</Text>
+      <Text style={styles.title}>Choose your method of payment</Text>
       <View style={styles.pageContainer}>
         <TouchableOpacity onPress={handleSubmit}>
           <View style={styles.debitCard}>
-            <FontAwesome style={styles.icon} name="credit-card-alt" />
-            <Text style={styles.btnText}>Debit/Credit Card</Text>
+            <FontAwesome style={styles.debitIcon} name="credit-card-alt" />
+            <Text style={styles.debitText}>Debit/Credit Card</Text>
           </View>
         </TouchableOpacity>
         {Platform.OS === "ios" && (
           <TouchableOpacity onPress={handleApplePay}>
             <View style={styles.applePay}>
-              <FontAwesome style={styles.icon} name="apple" />
-              <Text style={styles.btnText}>Pay</Text>
+              <FontAwesome style={styles.appleIcon} name="apple" />
+              <Text style={styles.appleText}>Pay</Text>
             </View>
           </TouchableOpacity>
         )}
@@ -153,7 +152,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   applePay: {
-    backgroundColor: "#000",
+    backgroundColor: "#fff",
     elevation: 3,
     padding: 15,
     flexDirection: "row",
@@ -166,11 +165,17 @@ const styles = StyleSheet.create({
     shadowRadius: 1,
     borderRadius: 10,
   },
-  btnText: { color: "#fff", fontWeight: "bold", fontSize: 18 },
-  icon: {
+  debitText: { color: "#fff", fontWeight: "bold", fontSize: 18 },
+  appleText: { color: "#000", fontWeight: "bold", fontSize: 18 },
+  debitIcon: {
     paddingHorizontal: 5,
     fontSize: 25,
     color: "#fff",
+  },
+  appleIcon: {
+    paddingHorizontal: 5,
+    fontSize: 25,
+    color: "#000",
   },
 });
 

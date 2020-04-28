@@ -10,7 +10,7 @@ import Prayer from "../Prayer/Prayer";
 import masjibBG from "../../assets/prayers2BG.png";
 import Loading from "./Loading";
 import axios from "axios";
-import env from "../../env";
+import ENV from "../../env";
 const Prayers = () => {
   const [prayers, setPrayers] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -22,7 +22,7 @@ const Prayers = () => {
   }, []);
 
   const fetchPrayers = () => {
-    const { apiUrl } = "https://uica-rest-v103.herokuapp.com/api";
+    const { apiUrl } = ENV();
     axios
       .get(`${apiUrl}/prayers`)
       .then(({ data: { data } }) => {

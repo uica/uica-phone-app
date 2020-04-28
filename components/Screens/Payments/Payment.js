@@ -11,7 +11,7 @@ import { CreditCardInput } from "react-native-credit-card-input";
 import axios from "axios";
 import CCFront from "../../../assets/CCFront.png";
 import CCBack from "../../../assets/CCBack.png";
-import env from "../../../env";
+import ENV from "../../../env";
 const stripe = require("stripe-client")(
   "pk_live_Mplks5zixAYELuIjYXp1873o00SstjVJXl"
 );
@@ -31,7 +31,7 @@ const Payment = ({ navigation, route }) => {
   };
 
   const handlePayment = async () => {
-    const { apiUrl } = "https://uica-rest-v103.herokuapp.com/api";
+    const { apiUrl } = ENV();
     setLoading(true);
     const { number, name, cvc, expiry } = cardInfo.values;
     const [exp_month, exp_year] = expiry.split("/");
