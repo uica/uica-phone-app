@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
     shadowColor: "#aaa",
     shadowOpacity: 0.2,
     shadowOffset: { height: 1, width: 1 },
+    opacity: 0.7,
   },
   prayerItem: {
     flex: 1,
@@ -32,10 +33,12 @@ const styles = StyleSheet.create({
   prayerName: {
     fontSize: 18,
     textAlign: "left",
+    fontWeight: "bold",
   },
   prayerTime: {
     fontSize: 18,
     textAlign: "right",
+    fontWeight: "bold",
   },
 });
 

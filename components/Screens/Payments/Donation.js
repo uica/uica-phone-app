@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   ScrollView,
   TextInput,
-  SafeAreaView,
 } from "react-native";
 
 const Donation = ({ navigation }) => {
@@ -74,7 +73,7 @@ const Donation = ({ navigation }) => {
       {selected && (
         <View style={{ padding: 10 }}>
           <TouchableOpacity
-            style={{ marginBottom: 200 }}
+            style={{ marginBottom: 250 }}
             onPress={handleContinue}
           >
             <View style={styles.continue}>

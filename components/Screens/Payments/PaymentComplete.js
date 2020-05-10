@@ -4,29 +4,41 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  Linking
+  Linking,
+  ScrollView,
 } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 const Amount = ({ navigation, route }) => {
+  const { receipt, billingInfo } = route.params;
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.receiptContainer}>
-        <FontAwesome name="check" size={250} style={{ color: "#52ae67" }} />
-        <Text style={styles.thankyou}>Thank you for your generosity</Text>
+        <FontAwesome name="check" size={200} style={{ color: "#52ae67" }} />
+        <Text style={styles.thankyou}>
+          Thank you {billingInfo.firstName} for your generosity
+        </Text>
         <TouchableOpacity
           style={styles.receiptBtn}
-          onPress={() => Linking.openURL(route.params.receipt)}
+          onPress={() => Linking.openURL(receipt)}
         >
-          <Text style={styles.receiptText}>View Your Receipt</Text>
+          <Text style={styles.receiptText}>View a copy of your receipt</Text>
         </TouchableOpacity>
       </View>
-    </View>
+      <View style={{ marginVertical: 20 }}>
+        <Text style={{ fontSize: 12, color: "#555", textAlign: "center" }}>
+          Note: Additional copy of this receipt was sent to{" "}
+          <Text style={{ fontWeight: "bold" }}>{billingInfo.email}</Text>. If
+          you did not receive the email, please feel free to contact the UICA to
+          obtain a copy.
+        </Text>
+      </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    padding: 25
+    padding: 25,
   },
   receiptContainer: {
     justifyContent: "center",
@@ -37,12 +49,12 @@ const styles = StyleSheet.create({
     shadowOffset: { height: 1, width: 1 },
     shadowOpacity: 0.9,
     shadowRadius: 1,
-    padding: 10
+    padding: 10,
   },
   thankyou: {
     fontSize: 25,
     textAlign: "center",
-    marginBottom: 20
+    marginBottom: 20,
   },
   receiptBtn: {
     width: "100%",
@@ -50,11 +62,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#52ae67",
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 5
+    borderRadius: 5,
   },
   receiptText: {
-    color: "#fff"
-  }
+    color: "#fff",
+  },
 });
 
 export default Amount;

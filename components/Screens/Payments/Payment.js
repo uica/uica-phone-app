@@ -12,9 +12,6 @@ import axios from "axios";
 import CCFront from "../../../assets/CCFront.png";
 import CCBack from "../../../assets/CCBack.png";
 import ENV from "../../../env";
-const stripe = require("stripe-client")(
-  "pk_live_Mplks5zixAYELuIjYXp1873o00SstjVJXl"
-);
 
 const Payment = ({ navigation, route }) => {
   const [cardInfo, setCardInfo] = useState({});
@@ -31,7 +28,8 @@ const Payment = ({ navigation, route }) => {
   };
 
   const handlePayment = async () => {
-    const { apiUrl } = ENV();
+    const { apiUrl, STRIPE_PUB_KEY } = ENV();
+    const stripe = require("stripe-client")(STRIPE_PUB_KEY);
     setLoading(true);
     const { number, name, cvc, expiry } = cardInfo.values;
     const [exp_month, exp_year] = expiry.split("/");
@@ -62,7 +60,10 @@ const Payment = ({ navigation, route }) => {
       });
     if (data.success) {
       setLoading(false);
-      navigation.navigate("paymentComplete", { receipt: data.receipt_url });
+      navigation.navigate("paymentComplete", {
+        receipt: data.receipt_url,
+        ...route.params,
+      });
     } else {
       alertError();
     }

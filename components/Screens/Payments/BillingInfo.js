@@ -125,6 +125,7 @@ const styles = StyleSheet.create({
   inputError: {
     padding: 10,
     backgroundColor: "#fff",
+    color: "#000",
     marginVertical: 5,
     borderWidth: 1,
     borderColor: "#D8000C",

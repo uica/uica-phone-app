@@ -81,6 +81,10 @@ const PaymentOptions = ({ navigation, route }) => {
               .then(({ data }) => {
                 if (data.success) {
                   paymentResponse.complete("success");
+                  navigation.navigate("paymentComplete", {
+                    receipt: data.receipt_url,
+                    ...route.params,
+                  });
                 } else {
                   Alert.alert(
                     "Apple Pay",

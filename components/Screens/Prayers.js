@@ -7,7 +7,7 @@ import {
   ImageBackground,
 } from "react-native";
 import Prayer from "../Prayer/Prayer";
-import masjibBG from "../../assets/prayers2BG.png";
+import masjibBG from "../../assets/prayers3BG.jpg";
 import Loading from "./Loading";
 import axios from "axios";
 import ENV from "../../env";
@@ -51,6 +51,9 @@ const Prayers = () => {
           source={masjibBG}
           style={{ width: "100%", height: "100%" }}
         >
+          <View>
+            <Text style={styles.header}>PRAYERS TIME</Text>
+          </View>
           <FlatList
             data={prayers}
             contentContainerStyle={styles.prayerItem}
@@ -66,6 +69,14 @@ const Prayers = () => {
 };
 
 const styles = StyleSheet.create({
+  header: {
+    color: "#fff",
+    textAlign: "center",
+    fontSize: 20,
+    opacity: 0.8,
+    paddingVertical: 20,
+    fontWeight: "bold",
+  },
   prayersContainer: {
     flex: 1,
   },
