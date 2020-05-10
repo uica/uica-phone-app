@@ -7,7 +7,7 @@ import {
   ImageBackground,
 } from "react-native";
 import Prayer from "../Prayer/Prayer";
-import masjibBG from "../../assets/prayers3BG.jpg";
+import prayersBG from "../../assets/prayers3BG.jpg";
 import Loading from "./Loading";
 import axios from "axios";
 import ENV from "../../env";
@@ -48,7 +48,7 @@ const Prayers = () => {
         <Loading />
       ) : (
         <ImageBackground
-          source={masjibBG}
+          source={prayersBG}
           style={{ width: "100%", height: "100%" }}
         >
           <View>
