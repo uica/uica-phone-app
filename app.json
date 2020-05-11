@@ -3,12 +3,8 @@
     "name": "UICA",
     "slug": "UICA",
     "privacy": "public",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
-    "version": "1.0.3",
+    "platforms": ["ios", "android", "web"],
+    "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -19,11 +15,9 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
-      "bundleIdentifier": "com.uica.app",
+      "bundleIdentifier": "com.uica.application",
       "buildNumber": "1",
       "supportsTablet": true,
       "usesAppleSignIn": true
